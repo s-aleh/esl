@@ -1,0 +1,50 @@
+<div style="padding: 16px 32px">
+
+  <mat-tab-group class="demo-tab-group">
+    <mat-tab label="List">
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>search</mat-icon> Search
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+      </mat-expansion-panel>
+
+      <mat-table #table [dataSource]="dataSource" matSort>
+            
+        <ng-container matColumnDef="base">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Base</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.base}}</mat-cell>
+        </ng-container>
+            
+        <ng-container matColumnDef="simple">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Simple</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.simple | implode}}</mat-cell>
+        </ng-container>
+            
+        <ng-container matColumnDef="participle">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Participle</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.participle | implode}}</mat-cell>
+        </ng-container>
+            
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            
+      </mat-table>
+
+      <mat-paginator #paginator
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [length]="dataSource.length"></mat-paginator>
+
+
+    </mat-tab>
+    <mat-tab label="Test">
+    </mat-tab>
+  </mat-tab-group>    
+</div>
